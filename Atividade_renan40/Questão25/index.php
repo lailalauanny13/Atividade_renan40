@@ -1,38 +1,41 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Document</title>
 </head>
 <body>
-    <form action="questao25.php" method="get">
-        <label for="num1">Digite o primeiro numero:</label>
-        <input type="number" name="num1" id="num1">
-
-        <label for="num2">Digite o segundo numero:</label>
-        <input type="number" name="num2" id="num2">
-
-        <input type="submit" value="Enviar">
+    <h2>Digite dois números</h2>
+    <form method="post">
+        Número 1:
+        <input type="number" name="num1" required>
+        <br><br>
+        Número 2:
+        <input type="number" name="num2" required>
+        <br><br>
+        <input type="submit" value="Verificar">
     </form>
-    
-    <?php 
-        
-    
-            $num1 = $_GET["num1"];
-            $num2 = $_GET["num2"];
 
-            if ($num1 == $num2) {
-                echo "Os números são iguais";
-            } else {
-                if ($num1 > $num2) {
-                    echo "O número $num1 é maior que $num2";
-                } else {
-                    echo "O número $num2 é maior que $num1";
-                }
-            }
-        
-    ?>
-    
+<?php
+
+    if(isset($_POST["num1"])){
+        $num1 = $_POST["num1"];
+        $num2 = $_POST["num2"];
+
+    if($num1 == $num2){
+        echo "Os números são iguais";
+}
+    else{
+        echo "Os números são diferentes <br>";
+    if($num1 > $num2){
+        echo "O maior número é: $num1";
+}
+    else{
+        echo "O maior número é: $num2";
+}
+}
+}
+?>
 </body>
 </html>

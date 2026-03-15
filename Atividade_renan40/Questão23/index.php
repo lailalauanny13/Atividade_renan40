@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Números</title>
+    <title>Document</title>
 </head>
 <body>
-    <form action="questao23.php" method="get">
-        <label for="num">Número:</label>
-        <input type="number" name="num" id="num">
-
-        <input type="submit" value="Enviar">
+    <h2>Digite um número</h2>
+    <form method="post">
+        Número:
+        <input type="number" name="numero" required>
+        <br><br>
+        <input type="submit" value="Verificar">
     </form>
-    
-    <?php 
-        
-        
-            $num = $_GET["num"];
-            if ($num == 40) {
-                echo "O número é igual 40";
-            } elseif ($num >= 80) {
-                echo "O número é maior ou igual a 80";
-            } elseif ($num < 25) {
-                echo "O número é igual ou menor do que 25";
-            }
-        
-    ?>
+
+<?php
+
+    if(isset($_POST["numero"])){
+        $numero = $_POST["numero"];
+
+    if($numero > 80){
+        echo "O número é maior que 80";
+    }
+    if($numero < 25){
+        echo "O número é menor que 25";
+    }
+    if($numero == 40){
+        echo "O número é igual a 40";
+}
+}
+
+?>
 </body>
+
 </html>

@@ -1,49 +1,64 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos</title>
+    <title>Document</title>
 </head>
 <body>
-    <form action="questao22.php" method="post">
-        <?php for ($i = 1; $i < 41; $i++):?>
-            Produto <?= $i ?>:
-            
-            Preço de compra:
-            <input type="number" step="any" name="compra[]">
-    
-            
+    <h2>Cadastro de Produtos</h2>
+<form method="post">
 
-            Preço de venda:
-            <input type="number" step="any" name="venda[]">
-        <?php endfor;?>  
-        <input type="submit" value="Enviar">
-        <br>  
-    </form>
+<?php
+    for($i = 1; $i <= 40; $i++){
+?>
+    <h4>Produto <?php echo $i; ?></h4>
+    Preço de custo:
+    <input type="number" step="0.01" name="custo[]" required>
+    Preço de venda:
+    <input type="number" step="0.01" name="venda[]" required>
+    <br><br>
 
-    <?php 
-    
+<?php
+}
+?>
+    <input type="submit" value="Calcular">
+</form>
 
-        $compras = $_POST["compra"];
+<?php
+
+    if(isset($_POST["custo"])){
+        $custos = $_POST["custo"];
         $vendas = $_POST["venda"];
 
-        foreach ($compras as $i => $c) {
-            echo "O produto: " . $i + 1 .  " de preço de compra " . $c . " e de preço de venda " . $vendas[$i] . " apresentou: " . "<br>";
+        $somaCusto = 0;
+        $somaVenda = 0;
 
-            if ($c == $vendas[$i]) {
-                echo "Embate";
-                echo "<br>";
-            } elseif ($c < $vendas[$i]) {
-                echo "Ganho";
-                echo "<br>";
-            } elseif ($c > $vendas[$i]) {
-                echo "Prejuizo";
-                echo "<br>";
-            }
-        }
-    
-    ?>
-    
+    for($i = 0; $i < 40; $i++){
+        $somaCusto += $custos[$i];
+        $somaVenda += $vendas[$i];
+
+    if($vendas[$i] > $custos[$i]){
+        echo "Produto ".($i+1)." → Lucro<br>";
+    }
+    else if($vendas[$i] < $custos[$i]){
+        echo "Produto ".($i+1)." → Prejuízo<br>";
+    }
+    else{
+        echo "Produto ".($i+1)." → Empate<br>";
+}
+
+}
+
+$mediaCusto = $somaCusto / 40;
+$mediaVenda = $somaVenda / 40;
+
+echo "<br>Média do preço de custo: $mediaCusto";
+echo "<br>Média do preço de venda: $mediaVenda";
+
+}
+
+?>
 </body>
+
 </html>

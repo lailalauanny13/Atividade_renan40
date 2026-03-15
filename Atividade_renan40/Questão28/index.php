@@ -1,59 +1,64 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salario</title>
+    <title>Document</title>
 </head>
 <body>
-    <form action="questao28.php" method="get">
+    <h2>Funcionários</h2>
+    <form method="post">
 
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome">
+<?php
+    for($i = 1; $i <= 584; $i++){
+?>
 
-        <label for="opcao">Sexo:</label>
-        <select name="opcao" required>
-            <option value="" disabled selected>Escolha</option>
-            <option value="masc">Masculino</option>
-            <option value="femi">Feminino</option>
-        </select>
-
-        <label for="idade">Idade:</label>
-        <input type="number" name="idade" id="idade">
-
-        <label for="sala">Salário fixo:</label>
-        <input type="number" name="sala" id="sala">
-
+        Funcionário <?php echo $i; ?><br>
+        Nome:
+        <input type="text" name="nome[]" required><br>
+        Salário:
+        <input type="number" step="0.01" name="salario[]" required><br>
+        Salário mínimo:
+        <input type="number" step="0.01" name="minimo[]" required><br>
+        <br>
+<?php
+}
+?>
         <input type="submit" value="Calcular">
     </form>
+<?php
 
-    <?php 
-    
+    if(isset($_POST["nome"])){
+        $nomes = $_POST["nome"];
+        $salarios = $_POST["salario"];
+        $minimos = $_POST["minimo"];
 
-        $opera = (string) $_GET["opera"];
-        $idade = $_GET["idade"];
-        $sexo = $_GET["sexo"];
-        $sala = $_GET["sala"];
+        $aumentoTotal = 0;
 
-        if ($sexo == "masc") {
-            if ($idade >= 30) {
-                $sala += 100;
-                echo "Seu salário é de: " . number_format($sala, 2, ",", ".");
-            } elseif ($idade < 30) {
-                $sala += 50;
-                echo "Seu salário é de: " . number_format($sala, 2, ",", ".");
-            }
-        } else {
-            if ($idade >= 30) {
-                $sala += 200;
-                echo "Seu salário é de: " . number_format($sala, 2, ",", ".");
-            } elseif ($idade < 30) {
-                $sala += 80;
-                echo "Seu salário é de: " . number_format($sala, 2, ",", ".");
-            }
-        }
-    
-    ?>
-    
+        for($i = 0; $i < 584; $i++){
+        $salario = $salarios[$i];
+        $minimo = $minimos[$i];
+        $quantidade = $salario / $minimo;
+
+    if($quantidade < 3){
+        $reajuste = $salario * 0.50;
+    }
+    else if($quantidade <= 10){
+        $reajuste = $salario * 0.20;
+    }
+    else if($quantidade <= 20){
+        $reajuste = $salario * 0.15;
+    }
+    else{
+        $reajuste = $salario * 0.10;
+    }
+
+$novoSalario = $salario + $reajuste;
+echo $nomes[$i] . " - Reajuste: $reajuste - Novo salário: $novoSalario <br>";
+$aumentoTotal += $reajuste;
+}
+echo "<br>Aumento total da folha: $aumentoTotal";
+}
+?>
 </body>
 </html>

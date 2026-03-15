@@ -6,28 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="get">
-        <label for="n1">Qual o custo de fabrica desse carro?</label>
-        <input type="text" name="n1" id="n1">
+    <form action="<?= $_SERVER["PHP_SELF"] ?>" method="get">
+        <label for="preco">Valor do carro:</label>
+        <input type="number" name="preco" id="preco">
+        <input type="submit" value="Calcular">
+    </form>
 
-        <input type="submit" value="Enviar">
-</form>
+    <?php 
+    if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["preco"])) {
+        $preco = $_GET["preco"];
+        $impostos = $preco * 1.45;
+        $resul = $imposto * 1.28;
 
-<?php 
-<?php
-$custoFabrica = 50000.00;
-$percentualImpostos = 0.45;
-$percentualDistribuidor = 0.28; 
-
- 
-$valorComImpostos = $custoFabrica + ($custoFabrica * $percentualImpostos);
-
-
-$custoConsumidor = $valorComImpostos + ($valorComImpostos * $percentualDistribuidor);
-
-echo "Custo final ao consumidor: R$ " . number_format($custoConsumidor, 2, ',', '.');
-?>
-?>
-
+        echo "O valor do carro ficaria: " . number_format($resul, 2, ",", ".");
+    }
+    ?>
+    
 </body>
 </html>

@@ -1,45 +1,51 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Números por extenso</title>
+    <title>Document</title>
 </head>
 <body>
-    <form action="questao26.php" method="get">
-        <label for="num">Número:</label>
-        <input type="number" name="num" id="num">
+    <h2>Digite um número de 1 a 5</h2>
+    <form method="post">
+        Número:
+        <input type="number" name="numero" required>
+        <br><br>
+        <input type="submit" value="Mostrar">
+</form>
 
-        <input type="submit" value="Enviar">
-    </form>
+<?php
 
-    <?php 
-        
-        
-            $num = $_GET["num"];
-            
-            switch ($num) {
-                case 1:
-                    echo "Um";
-                    break;
-                case 2:
-                    echo "Dois";
-                    break;
-                case 3:
-                    echo "Três";
-                    break;
-                case 4:
-                    echo "Quatro";
-                    break;
-                case 5:
-                    echo "Cinco";
-                    break;
-                default:
-                    echo "Número invalido";
-                    break;
-            }
-        
-    ?>
-    
+    if(isset($_POST["numero"])){
+        $numero = $_POST["numero"];
+
+        switch($numero){
+        case 1:
+        echo "Um";
+        break;
+
+        case 2:
+        echo "Dois";
+        break;
+
+        case 3:
+        echo "Três";
+        break;
+
+        case 4:
+        echo "Quatro";
+        break;
+
+        case 5:
+        echo "Cinco";
+        break;
+
+        default:
+        echo "Número inválido";
+
+}
+}
+
+?>
 </body>
 </html>

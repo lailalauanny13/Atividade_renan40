@@ -1,52 +1,62 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Números e caracteres</title>
+    <title>Document</title>
 </head>
 <body>
-    <form action="questao30.php" method="get">
-
-        <label for="opera">Operador:</label>
-        <input type="text" name="opera" id="opera">
-
-        <label for="num1">Número um:</label>
-        <input type="number" name="num1" id="num1">
-
-        <label for="num2">Número dois:</label>
-        <input type="number" name="num2" id="num2">
-
+    <h2>Dados do Funcionário</h2>
+    <form method="post">
+        Nome:
+        <input type="text" name="nome" required>
+        <br><br>
+        Sexo:
+        <select name="sexo" required>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+        </select>
+        <br><br>
+        Idade:
+        <input type="number" name="idade" required>
+        <br><br>
+        Salário fixo:
+        <input type="number" step="0.01" name="salario" required>
+        <br><br>
         <input type="submit" value="Calcular">
     </form>
 
-    <?php 
-   
+<?php
 
-        $opera = (string) $_GET["opera"];
-        $num1 = $_GET["num1"];
-        $num2 = $_GET["num2"];
-        $operadores = ["x", "-", "+", "/"];
+    if(isset($_POST["nome"])){
+        $nome = $_POST["nome"];
+        $sexo = $_POST["sexo"];
+        $idade = $_POST["idade"];
+        $salario = $_POST["salario"];
 
-        if (in_array($opera, $operadores)) {
-            if ($opera == "+") {
-                echo "O resultado é: " . $num1 + $num2;
-            } elseif ($opera == "-") {
-                echo "O resultado é: " . $num1 - $num2;
-            } elseif ($opera == "x") {
-                echo "O resultado é: " . $num1 * $num2;
-            } elseif ($opera == "/") {
-                if ($num2 != 0) {
-                    echo "O resultado é: " . $num1 / $num2;
-                } else {
-                    echo "Divisão por zero inválida";
-                } 
-            } 
-        } else {
-            echo "Operação inválida";
+    if($sexo == "M"){
+
+        if($idade >= 30){
+            $abono = 100;
+        }else{
+            $abono = 50;
         }
-    
-    ?>
-    
+
+    }else{
+
+        if($idade >= 30){
+            $abono = 200;
+        }else{
+            $abono = 80;
+        }
+
+}
+$salarioLiquido = $salario + $abono;
+
+echo "Nome: $nome <br>";
+echo "Salário líquido: $salarioLiquido";
+}
+?>
+
 </body>
 </html>

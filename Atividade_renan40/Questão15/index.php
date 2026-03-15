@@ -7,24 +7,22 @@
 </head>
 <body>
     <form action="" method="get">
-        
-        <label for="numero">Escreva um número:</label>
-        <input type="text" name="numero" id="numero">
+        <label for="num1">Num1:</label>
+        <input type="number" name="num1" id="num1">
+        <input type="submit" value="Calcular">
+    </form>
 
+    <?php 
+    if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["num1"])) {
+        $num1 = $_GET["num1"];
 
-        <input type="submit" value="Enviar">
-</form>
-
-<?php 
-$numero = $_GET['numero'] ?? 0;
-
-if ($numero >= 100 && $numero <= 200) {
-    echo "O número $numero está no intervalo entre 100 e 200.";
-} else {
-    echo "O número $numero está fora do intervalo.";
-}
-
-?>
-
+        if ($num1 >= 100 && $num1 <= 200) {
+            echo "O número $num1 esta no intervalo de 100 e 200";
+        } else {
+            echo "O número $num1 não esta no intervalo entre 100 e 200";
+        }
+    }
+    ?>
+    
 </body>
 </html>
